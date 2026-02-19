@@ -7,9 +7,65 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Main Menu"
-      Background="#F5F6FA">
+      Background="#363636">
 
     <Grid>
-        <TextBlock>Pinga</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*" />
+            <RowDefinition Height="70*" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0">
+            <TextBlock TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"
+                    Text="BINGO" FontSize="60" FontWeight="Bold" Foreground="White"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+
+            <TextBox x:Name="code"
+                    FontSize="24"
+                    Margin="0,0,0,20"
+                    Height="35"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0, 20, 0,0">
+                <Button x:Name="joinRoomButton"
+                        Width="130"
+                        Margin="0 0 10 0"
+                        Padding="12 8"
+                        Background="LightBlue"
+                        Foreground="Blue"
+                        BorderBrush="Blue"
+                        BorderThickness="1"
+                        Click="saveUserButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xF5B0;"
+                                    FontSize="18"
+                                    Margin="0 0 8 0"/>
+                        <TextBlock Text="Entrar a Sala"
+                                                    FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="createRoomButton"
+                        Width="130"
+                        Margin="10 0 0 0"
+                        Padding="12 8"
+                        Background="LimeGreen"
+                        Foreground="DarkGreen"
+                        BorderBrush="DarkGreen"
+                        BorderThickness="1"
+                        Click="createRoomButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
+                                    Text="&#xE710;"
+                                    FontSize="18"
+                                    Margin="0 0 8 0"/>
+                        <TextBlock Text="Crear Sala"
+                                                    FontWeight="Bold"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
