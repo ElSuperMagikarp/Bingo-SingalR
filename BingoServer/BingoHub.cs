@@ -5,6 +5,7 @@ public class BingoHub : Hub
     List<int> bingoNumbers;
     List<int> calledNumbers;
 
+    bool gameStarted = false;
     bool fiveNumbersCalled = false;
 
     Dictionary<string, List<int>> activePlayers;
@@ -12,14 +13,17 @@ public class BingoHub : Hub
     // GAME MANAGEMENT
     public async Task StartGame()
     {
-        resetBingo();
+        gameStarted = true;
 
         await Clients.All.SendAsync("GameStarted");
 
+        await Task.Delay(1000);
         foreach (int number in bingoNumbers)
         {
             calledNumbers.Add(number);
             await Clients.All.SendAsync("NumberCalled", number);
+
+            await Task.Delay(10000);
         }
     }
 
@@ -78,6 +82,7 @@ public class BingoHub : Hub
         }
 
         await Clients.All.SendAsync("SuccessfulBingo");
+        resetBingo();
     }
 
     private void resetBingo()
@@ -90,6 +95,8 @@ public class BingoHub : Hub
         calledNumbers = new List<int>();
         fiveNumbersCalled = false;
         activePlayers.Clear();
+
+        gameStarted = false;
     }
 
     // CONNECTION MANAGEMENT
@@ -97,6 +104,11 @@ public class BingoHub : Hub
     {
         activePlayers.Remove(Context.ConnectionId);
         return base.OnDisconnectedAsync(exception);
+    }
+
+    public async Task TestMethod(string message)
+    {
+        await Clients.Caller.SendAsync("TestEvent", message);
     }
     private void sendMessageToClient(IClientProxy client, string message)
     {
