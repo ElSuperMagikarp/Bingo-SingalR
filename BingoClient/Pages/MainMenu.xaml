@@ -23,13 +23,11 @@
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
 
-            <TextBox x:Name="code"
-                    FontSize="24"
-                    Margin="0,0,0,20"
-                    Height="35"/>
+            <TextBlock TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"
+                    Text="El joc està per començar" FontSize="30" Foreground="White"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0, 20, 0,0">
-                <Button x:Name="joinRoomButton"
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20, 0,0">
+                <Button x:Name="startGameButton"
                         Width="130"
                         Margin="0 0 10 0"
                         Padding="12 8"
@@ -37,31 +35,13 @@
                         Foreground="Blue"
                         BorderBrush="Blue"
                         BorderThickness="1"
-                        Click="saveUserButton_Click">
+                        Click="startGame_Click">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontFamily="Segoe MDL2 Assets"
                                     Text="&#xF5B0;"
                                     FontSize="18"
                                     Margin="0 0 8 0"/>
-                        <TextBlock Text="Entrar a Sala"
-                                                    FontWeight="Bold"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="createRoomButton"
-                        Width="130"
-                        Margin="10 0 0 0"
-                        Padding="12 8"
-                        Background="LimeGreen"
-                        Foreground="DarkGreen"
-                        BorderBrush="DarkGreen"
-                        BorderThickness="1"
-                        Click="createRoomButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontFamily="Segoe MDL2 Assets"
-                                    Text="&#xE710;"
-                                    FontSize="18"
-                                    Margin="0 0 8 0"/>
-                        <TextBlock Text="Crear Sala"
+                        <TextBlock Text="Començar partida"
                                                     FontWeight="Bold"/>
                     </StackPanel>
                 </Button>

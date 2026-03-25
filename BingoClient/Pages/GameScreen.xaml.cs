@@ -16,13 +16,28 @@ using System.Windows.Shapes;
 namespace BingoClient.Pages
 {
     /// <summary>
-    /// Interaction logic for MainMenu.xaml
+    /// Interaction logic for GameScreen.xaml
     /// </summary>
-    public partial class MainMenu : Page
+    public partial class GameScreen : Page
     {
-        public MainMenu()
+        public GameScreen()
         {
             InitializeComponent();
+        }
+
+        private void fiveNumbersButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("fiveNumbersButton_Click");
+        }
+
+        private void bingoButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("bingoButton_Click");
+        }
+
+        private void numberClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("numberClick");
         }
     }
 }

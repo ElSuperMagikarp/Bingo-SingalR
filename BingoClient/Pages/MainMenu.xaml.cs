@@ -24,5 +24,10 @@ namespace BingoClient.Pages
         {
             InitializeComponent();
         }
+
+        private void startGame_Click(object sender, RoutedEventArgs e)
+        {
+            // CALL START GAME
+        }
     }
 }

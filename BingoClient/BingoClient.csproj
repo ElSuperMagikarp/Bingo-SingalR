@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Pages\GameScreen.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
