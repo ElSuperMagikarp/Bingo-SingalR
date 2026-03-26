@@ -1,77 +1,70 @@
 ﻿<Page x:Class="BingoClient.Pages.GameScreen"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BingoClient.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="GameScreen"
       Background="#363636">
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="33*" />
-            <RowDefinition Height="33*" />
-            <RowDefinition Height="33*" />
+            <RowDefinition Height="Auto"/>
+            <!-- Top: Room info + start -->
+            <RowDefinition Height="Auto"/>
+            <!-- Current Number -->
+            <RowDefinition Height="*"/>
+            <!-- Bingo card buttons -->
+            <RowDefinition Height="Auto"/>
+            <!-- Bottom: 5 numbers / Bingo -->
         </Grid.RowDefinitions>
 
-
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
-            <TextBlock Name="CurrentNumber"
-                    TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"
-                    Text="0" FontSize="60" FontWeight="Bold" Background="White" Padding="10,1,10,1"/>
+        <!-- Top panel -->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="10">
+            <TextBlock Text="Room:"
+                       Foreground="White"
+                       Margin="0,0,5,0"/>
+            <TextBlock x:Name="RoomText"
+                       Foreground="LightBlue"
+                       FontWeight="Bold"/>
+            <Button x:Name="StartButton"
+                    Content="Start Game"
+                    Margin="20,0,0,0"
+                    Click="StartGame_Click"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-            <Button x:Name="fiveNumbersButton"
-                    Width="130"
-                    Margin="0 0 10 0"
-                    Padding="12 20"
-                    Background="LightCyan"
-                    Foreground="DarkCyan"
-                    BorderBrush="DarkCyan"
-                    BorderThickness="1"
-                    Click="fiveNumbersButton_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="40"/>
-                    </Style>
-                </Button.Resources>
-                5 Primers Números
-            </Button>
-            <Button x:Name="bingoButton"
-                    Width="130"
-                    Margin="0 0 10 0"
-                    Padding="12 20"
-                    Background="LightCyan"
-                    Foreground="DarkCyan"
-                    BorderBrush="DarkCyan"
-                    BorderThickness="1"
-                    Click="bingoButton_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="40"/>
-                    </Style>
-                </Button.Resources>
-                Bingo
-            </Button>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+        <!-- Current number display -->
+        <TextBlock x:Name="CurrentNumber"
+                   Grid.Row="1"
+                   Text="0"
+                   FontSize="60"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0,10,0,10"/>
 
-            <Button
-                Width="50" Height="50"
-                Background="White" Foreground="Gray" BorderBrush="Gray"
-                BorderThickness="1"
-                Click="numberClick">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="20"/>
-                    </Style>
-                </Button.Resources>
-                N
-            </Button>
+        <!-- Bingo card buttons (5x3) -->
+        <UniformGrid Grid.Row="2"
+                     x:Name="BingoCardGrid"
+                     Rows="3"
+                     Columns="5"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="0,10,0,10">
+            <!-- Buttons will be added dynamically in code-behind -->
+        </UniformGrid>
 
+        <!-- Bottom buttons -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="10">
+            <Button Content="5 Numbers"
+                    Width="120"
+                    Margin="5"
+                    Click="fiveNumbersButton_Click"/>
+            <Button Content="Bingo"
+                    Width="120"
+                    Margin="5"
+                    Click="bingoButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>

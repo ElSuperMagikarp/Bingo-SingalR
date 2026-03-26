@@ -1,33 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BingoClient.Pages
 {
-    /// <summary>
-    /// Interaction logic for MainMenu.xaml
-    /// </summary>
     public partial class MainMenu : Page
     {
         public MainMenu()
         {
             InitializeComponent();
+            SetupSignalR();
         }
 
-        private void startGame_Click(object sender, RoutedEventArgs e)
+        private void SetupSignalR()
         {
-            // CALL START GAME
+            var conn = MainWindow.Connection;
+
+            conn.On<string, bool>("RoomJoined", (roomId, isHost) =>
+            {
+                Dispatcher.Invoke(async () =>
+                {
+                    // Register player immediately after joining
+                    await MainWindow.Connection.InvokeAsync("RegisterPlayer");
+
+                    // Then navigate to the game screen
+                    NavigationService.Navigate(new GameScreen(roomId, isHost));
+                });
+            });
+
+            conn.On<string>("Message", msg =>
+            {
+                Dispatcher.Invoke(() => MessageBox.Show(msg));
+            });
+        }
+
+        private async void CreateRoom_Click(object sender, RoutedEventArgs e)
+        {
+            string roomId = RoomInput.Text;
+
+            if (string.IsNullOrWhiteSpace(roomId))
+            {
+                MessageBox.Show("Enter room id");
+                return;
+            }
+
+            await MainWindow.Connection.InvokeAsync("CreateRoom", roomId);
+        }
+
+        private async void JoinRoom_Click(object sender, RoutedEventArgs e)
+        {
+            string roomId = RoomInput.Text;
+
+            if (string.IsNullOrWhiteSpace(roomId))
+            {
+                MessageBox.Show("Enter room id");
+                return;
+            }
+
+            await MainWindow.Connection.InvokeAsync("JoinRoom", roomId);
         }
     }
 }
